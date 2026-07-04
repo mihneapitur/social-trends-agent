@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List, Optional
 
 class InteractionRequest(BaseModel):
@@ -30,3 +30,24 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     response: str
     analysis: Optional[str] = None
+
+class XquikPostImport(BaseModel):
+    id: Optional[str] = None
+    tweet_id: Optional[str] = None
+    text: Optional[str] = None
+    title: Optional[str] = None
+    description: Optional[str] = None
+    category: Optional[str] = None
+    tags: List[str] = Field(default_factory=list)
+    created_at: Optional[str] = None
+    url: Optional[str] = None
+    image_url: Optional[str] = None
+    like_count: Optional[int] = None
+    reply_count: Optional[int] = None
+    retweet_count: Optional[int] = None
+    share_count: Optional[int] = None
+    view_count: Optional[int] = None
+    impression_count: Optional[int] = None
+
+class XquikImportRequest(BaseModel):
+    posts: List[XquikPostImport]

@@ -1,5 +1,6 @@
 import time
 import math
+from datetime import datetime
 from typing import List, Dict, Any
 from app.data import INITIAL_POSTS
 
@@ -108,6 +109,97 @@ class TrendAlgorithm:
             post["shares"] += 1
             
         return True
+
+    def _coerce_timestamp(self, value: Any) -> float:
+        if value is None:
+            return self.get_current_time()
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            pass
+
+        try:
+            return datetime.fromisoformat(str(value).replace("Z", "+00:00")).timestamp()
+        except ValueError:
+            return self.get_current_time()
+
+    def _first_value(self, row: Dict[str, Any], keys: List[str], default: Any = None) -> Any:
+        for key in keys:
+            value = row.get(key)
+            if value not in (None, ""):
+                return value
+        return default
+
+    def _number_value(self, row: Dict[str, Any], keys: List[str]) -> int:
+        value = self._first_value(row, keys, 0)
+        try:
+            return max(int(value), 0)
+        except (TypeError, ValueError):
+            return 0
+
+    def _tags_value(self, row: Dict[str, Any]) -> List[str]:
+        tags = row.get("tags")
+        if isinstance(tags, list):
+            return [str(tag) for tag in tags if str(tag).strip()]
+        if isinstance(tags, str):
+            return [tag.strip() for tag in tags.split(",") if tag.strip()]
+        return ["xquik"]
+
+    def _add_imported_interactions(
+        self,
+        post_id: str,
+        views: int,
+        likes: int,
+        shares: int,
+        timestamp: float,
+    ) -> None:
+        for interaction_type, count, cap in [
+            ("view", views, 25),
+            ("like", likes, 25),
+            ("share", shares, 25),
+        ]:
+            for index in range(min(count, cap)):
+                self.interactions.append({
+                    "post_id": post_id,
+                    "type": interaction_type,
+                    "timestamp": timestamp - index,
+                })
+
+    def import_xquik_posts(self, rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        imported_posts = []
+        for index, row in enumerate(rows):
+            raw_id = self._first_value(row, ["id", "tweet_id"], f"import-{index + 1}")
+            post_id = f"xquik-{raw_id}"
+            title = self._first_value(row, ["title", "text"], "Imported Xquik post")
+            description = self._first_value(row, ["description", "text"], title)
+            views = self._number_value(row, ["impression_count", "view_count", "views"])
+            likes = self._number_value(row, ["like_count", "likes"])
+            replies = self._number_value(row, ["reply_count", "replies"])
+            retweets = self._number_value(row, ["retweet_count", "reposts"])
+            shares = self._number_value(row, ["share_count", "shares"]) + retweets + replies
+            timestamp = self._coerce_timestamp(row.get("created_at"))
+
+            post = {
+                "id": post_id,
+                "platform": "xquik",
+                "category": self._first_value(row, ["category"], "xquik"),
+                "title": str(title)[:120],
+                "description": str(description),
+                "image_url": self._first_value(
+                    row,
+                    ["image_url"],
+                    "https://placehold.co/600x400?text=Xquik",
+                ),
+                "tags": self._tags_value(row),
+                "likes": likes,
+                "views": views,
+                "shares": shares,
+            }
+            self.posts[post_id] = post
+            self._add_imported_interactions(post_id, views, likes, shares, timestamp)
+            imported_posts.append(post)
+
+        return imported_posts
 
     def get_posts_with_scores(self, platform: str = None) -> List[Dict[str, Any]]:
         current_time = self.get_current_time()
