@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import os
 
-from app.models import InteractionRequest, PostResponse, TrendCategory, ChatRequest, ChatResponse
+from app.models import ChatRequest, ChatResponse, InteractionRequest, XquikImportRequest
 from app.algorithm import TrendAlgorithm
 from app.agent import AIAgent
 from app.data import MY_PROFILES_STATS
@@ -23,11 +23,22 @@ app.add_middleware(
 # Instantiate algorithm and agent
 algo = TrendAlgorithm(decay_rate=0.005)
 agent = AIAgent(algo)
+SUPPORTED_PLATFORMS = ["facebook", "pinterest", "xquik"]
+
+def require_supported_platform(platform: str) -> None:
+    if platform not in SUPPORTED_PLATFORMS:
+        valid_platforms = "', '".join(SUPPORTED_PLATFORMS)
+        raise HTTPException(status_code=400, detail=f"Invalid platform. Must be '{valid_platforms}'.")
+
+def dump_model(model):
+    if hasattr(model, "model_dump"):
+        return model.model_dump(exclude_none=True)
+    return model.dict(exclude_none=True)
 
 @app.get("/api/feed")
 def get_feed(platform: str = None):
-    if platform and platform not in ["facebook", "pinterest"]:
-        raise HTTPException(status_code=400, detail="Invalid platform. Must be 'facebook' or 'pinterest'.")
+    if platform:
+        require_supported_platform(platform)
     try:
         posts = algo.get_posts_with_scores(platform)
         return posts
@@ -55,9 +66,18 @@ def record_interaction(req: InteractionRequest):
 
 @app.get("/api/trends")
 def get_trends(platform: str):
-    if platform not in ["facebook", "pinterest"]:
-        raise HTTPException(status_code=400, detail="Invalid platform. Must be 'facebook' or 'pinterest'.")
+    require_supported_platform(platform)
     return algo.get_trending_categories(platform)
+
+@app.post("/api/import/xquik")
+def import_xquik_posts(req: XquikImportRequest):
+    rows = [dump_model(post) for post in req.posts]
+    imported_posts = algo.import_xquik_posts(rows)
+    return {
+        "imported": len(imported_posts),
+        "platform": "xquik",
+        "posts": imported_posts,
+    }
 
 @app.get("/api/my-profiles")
 def get_my_profiles():

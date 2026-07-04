@@ -68,3 +68,31 @@ $$Score(t) = \sum_{i} Weight_i \times e^{-\lambda (t - t_i)}$$
 
 - $\lambda$ (decay rate) este setat implicit la `0.005` (ceea ce înseamnă că relevanța unei acțiuni scade la aproximativ 22% după 5 minute de inactivitate).
 - Când avansezi timpul simulat (din sidebar), diferența $t - t_i$ crește artificial, scăzând rapid scorurile postărilor vechi dacă acestea nu primesc interacțiuni proaspete.
+
+## Import Xquik
+
+Backend-ul poate importa postări exportate din Xquik și le poate analiza cu
+același algoritm de trenduri:
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/import/xquik \
+  -H "Content-Type: application/json" \
+  -d '{
+    "posts": [
+      {
+        "tweet_id": "1840000000000000000",
+        "text": "Lansare produs",
+        "category": "product",
+        "tags": ["launch", "product"],
+        "created_at": "2026-07-04T12:00:00Z",
+        "like_count": 42,
+        "reply_count": 8,
+        "retweet_count": 5,
+        "impression_count": 1800
+      }
+    ]
+  }'
+```
+
+După import, folosește `platform=xquik` în `/api/feed` sau `/api/trends` pentru
+a vedea scorurile și categoriile calculate.
