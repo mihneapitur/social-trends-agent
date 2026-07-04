@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Orange background circle with gradient -->
+  <defs>
+    <linearGradient id="redditGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF5700" />
+      <stop offset="100%" stop-color="#FF4500" />
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="url(#redditGrad)" />
+  
+  <!-- Snoo Mascot Group -->
+  <g transform="translate(1, 2)">
+    <!-- Ears -->
+    <circle cx="32" cy="56" r="7" fill="#FFFFFF" />
+    <circle cx="66" cy="56" r="7" fill="#FFFFFF" />
+    
+    <!-- Face / Head -->
+    <ellipse cx="49" cy="56" rx="20" ry="16" fill="#FFFFFF" />
+    
+    <!-- Eyes (Orange) -->
+    <circle cx="41" cy="54" r="3.5" fill="#FF4500" />
+    <circle cx="57" cy="54" r="3.5" fill="#FF4500" />
+    
+    <!-- Mouth (Smile) -->
+    <path d="M 44 63 Q 49 68 54 63" fill="none" stroke="#FF4500" stroke-width="2.5" stroke-linecap="round" />
+    
+    <!-- Antenna -->
+    <path d="M 49 40 L 49 26" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 49 26 Q 59 23 61 28" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" />
+    <!-- Antenna circle -->
+    <circle cx="63" cy="29" r="4.5" fill="#FFFFFF" />
+  </g>
+</svg>

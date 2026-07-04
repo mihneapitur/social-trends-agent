@@ -1,0 +1,24 @@
+{
+  "name": "TrendAgent AI Dashboard",
+  "short_name": "TrendAgent",
+  "description": "Simulare în timp real a trendurilor și audit AI pentru profilele tale de social media.",
+  "start_url": "/?pwa=true",
+  "display": "standalone",
+  "background_color": "#060913",
+  "theme_color": "#080c16",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Trends - AI Agent Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css?v=4">
+    <!-- PWA Support -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#080c16">
+</head>
+<body class="theme-dark">
+
+    <!-- MOBILE TOP BAR -->
+    <header class="mobile-top-bar">
+        <button id="mobile-menu-btn" title="Meniu lateral">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="mobile-logo">
+            <i class="fa-solid fa-brain-circuit logo-icon"></i>
+            <span>TrendAgent <span>AI</span></span>
+        </div>
+        <button id="mobile-chat-btn" title="Asistent AI & Statistici">
+            <i class="fa-solid fa-comments"></i>
+            <span class="pulse-dot-small"></span>
+        </button>
+    </header>
+
+    <div class="body-overlay" id="body-overlay"></div>
+
+    <div class="app-container">
+        
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="app-sidebar">
+            <button class="mobile-close-btn" id="close-sidebar-btn" title="Închide meniu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fa-solid fa-brain-circuit logo-icon"></i>
+                    <span>TrendAgent <span>AI</span></span>
+                </div>
+            </div>
+            
+            <div class="sidebar-menu">
+                <div class="menu-section">
+                    <span class="menu-title">Selectează Platforma</span>
+                    <button class="platform-btn active" id="btn-facebook" data-platform="facebook">
+                        <i class="fa-brands fa-facebook"></i>
+                        <span>Facebook Feed</span>
+                    </button>
+                    <button class="platform-btn" id="btn-pinterest" data-platform="pinterest">
+                        <i class="fa-brands fa-pinterest"></i>
+                        <span>Pinterest Pins</span>
+                    </button>
+                </div>
+
+                <div class="menu-section">
+                    <span class="menu-title">Profilele Mele</span>
+                    <button class="platform-btn" id="btn-my-facebook" data-platform="my-facebook">
+                        <i class="fa-brands fa-facebook"></i>
+                        <span>Facebook-ul Meu</span>
+                    </button>
+                    <button class="platform-btn" id="btn-my-instagram" data-platform="my-instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span>Instagram-ul Meu</span>
+                    </button>
+                    <button class="platform-btn" id="btn-my-reddit" data-platform="my-reddit">
+                        <i class="fa-brands fa-reddit"></i>
+                        <span>Reddit-ul Meu</span>
+                    </button>
+                </div>
+
+                <div class="menu-section">
+                    <span class="menu-title">Control Timp (Simulare)</span>
+                    <div class="simulation-time-box">
+                        <div class="time-label">Timp Simulat Curent:</div>
+                        <div id="simulated-time-display">Încarcă...</div>
+                    </div>
+                    <div class="sim-controls">
+                        <button class="sim-btn" data-advance="60"><i class="fa-solid fa-forward-step"></i> +1 Min</button>
+                        <button class="sim-btn" data-advance="300"><i class="fa-solid fa-forward"></i> +5 Min</button>
+                        <button class="sim-btn" data-advance="1800"><i class="fa-solid fa-bolt"></i> +30 Min</button>
+                        <button class="sim-btn" data-advance="3600"><i class="fa-solid fa-clock"></i> +1 Oră</button>
+                    </div>
+                    <button class="reset-btn" id="btn-reset-simulation">
+                        <i class="fa-solid fa-arrows-rotate"></i> Resetare Simulări
+                    </button>
+                </div>
+
+                <div class="menu-section profile-card">
+                    <span class="menu-title">Profil Autor</span>
+                    <div class="profile-info">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <img src="assets/fb_profile.png" alt="Mihnea Pițur" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border-color);">
+                            <div class="profile-name">Mihnea Pițur</div>
+                        </div>
+                        <div class="profile-links">
+                            <a href="https://www.facebook.com/mihnea.pitur.18" target="_blank" class="profile-link fb" title="Facebook">
+                                <i class="fa-brands fa-facebook"></i>
+                            </a>
+                            <a href="https://www.instagram.com/jesuismihnea" target="_blank" class="profile-link ig" title="Instagram">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                            <a href="https://www.reddit.com/user/Potential-Shirt-7063" target="_blank" class="profile-link rd" title="Reddit">
+                                <i class="fa-brands fa-reddit"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-section about-card">
+                    <h4>Cum funcționează?</h4>
+                    <p>Fiecare Like (5 pct), Vizualizare (1 pct) și Share/Salvare (10 pct) crește scorul unei postări. Algoritmul aplică o reducere exponențială (Time Decay) în funcție de vechimea acțiunii. Agentul AI scanează permanent datele pentru a deduce trendurile în creștere.</p>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <span class="internship-tag">Practică AI Agent 2026</span>
+            </div>
+        </aside>
+
+        <!-- MAIN FEED AREA -->
+        <main class="feed-area">
+            <header class="feed-header">
+                <div class="header-title">
+                    <h1 id="feed-title-text">Feed Facebook</h1>
+                    <p id="feed-subtitle-text">Simulează activitatea pentru a influența trendurile în timp real</p>
+                </div>
+                <div class="live-indicator">
+                    <span class="pulse-dot"></span>
+                    <span>Algoritm activ (λ = 0.005)</span>
+                </div>
+            </header>
+
+            <div class="feed-content" id="feed-posts-container">
+                <!-- Posts will be generated dynamically here -->
+                <div class="loading-spinner">
+                    <i class="fa-solid fa-circle-notch fa-spin"></i> Se încarcă postările...
+                </div>
+            </div>
+        </main>
+
+        <!-- RIGHT SIDEBAR (ANALYTICS & CHAT) -->
+        <section class="analytics-panel" id="app-analytics">
+            <button class="mobile-close-btn" id="close-analytics-btn" title="Închide asistent">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <!-- Live Trends Analytics -->
+            <div class="panel-section trends-card">
+                <h3><i class="fa-solid fa-chart-line"></i> Analytics Trenduri Actuale</h3>
+                <p class="section-desc">Punctajele calculate în timp real de algoritmul Time Decay</p>
+                <div class="trends-list" id="trends-list-container">
+                    <!-- Dynamic Progress Bars -->
+                    <div class="loading-spinner small">
+                        <i class="fa-solid fa-circle-notch fa-spin"></i> Calculare scoruri...
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Agent Interface -->
+            <div class="panel-section agent-chat-card">
+                <div class="agent-card-header">
+                    <div class="agent-avatar">
+                        <i class="fa-solid fa-robot"></i>
+                        <span class="online-dot"></span>
+                    </div>
+                    <div class="agent-info">
+                        <h3>Agent AI Trends</h3>
+                        <span>Activ • Monitorizează activitatea</span>
+                    </div>
+                </div>
+
+                <!-- Agent Cognitive Process (Thoughts Terminal) -->
+                <div class="thought-process-container">
+                    <div class="thought-header">
+                        <span><i class="fa-solid fa-terminal"></i> Log Raționament AI</span>
+                        <button id="toggle-thoughts-btn" title="Ascunde/Afișează log-ul"><i class="fa-solid fa-chevron-up"></i></button>
+                    </div>
+                    <pre class="thought-log" id="ai-thought-log">Inițializare Agent... Așteptare interacțiuni.</pre>
+                </div>
+
+                <!-- Conversational Chat -->
+                <div class="chat-dialogue-container" id="chat-messages-container">
+                    <!-- Welcome Message -->
+                    <div class="chat-message bot">
+                        <div class="message-bubble">
+                            Salut! Sunt asistentul tău AI de practică. Încearcă să dai câteva Like-uri sau Share-uri în feed, apoi întreabă-mă ce este în trend sau ce recomandări am!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Input Form -->
+                <form class="chat-input-form" id="chat-input-form">
+                    <input type="text" id="chat-input-field" placeholder="Întreabă agentul despre trenduri..." autocomplete="off">
+                    <button type="submit" class="chat-send-btn" id="chat-send-button" title="Trimite mesaj">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Script File -->
+    <script src="script.js?v=4"></script>
+</body>
+</html>
