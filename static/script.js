@@ -688,6 +688,12 @@ function renderMyFacebookProfile(data) {
     data.recent_activity.forEach(act => {
         const item = document.createElement('div');
         item.className = 'profile-post-card';
+        const safeTitle = act.title
+            .replace(/\\/g, '\\\\')
+            .replace(/'/g, "\\'")
+            .replace(/"/g, '\\"')
+            .replace(/\n/g, '\\n')
+            .replace(/\r/g, '\\r');
         item.innerHTML = `
             <div class="p-post-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
                 <img src="assets/fb_profile.png" alt="Mihnea Pițur" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(255,255,255,0.1);">
@@ -705,7 +711,7 @@ function renderMyFacebookProfile(data) {
                     <span><i class="fa-regular fa-thumbs-up"></i> ${act.likes}</span>
                     <span><i class="fa-solid fa-share"></i> ${act.shares}</span>
                 </div>
-                <button class="p-post-action-btn fb-btn" onclick="askAIPostAnalysis('Facebook', '${act.title.replace(/'/g, "\\'")}')">
+                <button class="p-post-action-btn fb-btn" onclick="askAIPostAnalysis('Facebook', '${safeTitle}')">
                     <i class="fa-solid fa-wand-magic-sparkles"></i> Analizează cu AI
                 </button>
             </div>
@@ -772,6 +778,12 @@ function renderMyInstagramProfile(data) {
     data.recent_activity.forEach(act => {
         const item = document.createElement('div');
         item.className = 'profile-post-card';
+        const safeCaption = act.caption
+            .replace(/\\/g, '\\\\')
+            .replace(/'/g, "\\'")
+            .replace(/"/g, '\\"')
+            .replace(/\n/g, '\\n')
+            .replace(/\r/g, '\\r');
         item.innerHTML = `
             <div class="p-post-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
                 <img src="assets/ig_profile.png" alt="Mihnea Pițur" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(255,255,255,0.1);">
@@ -789,7 +801,7 @@ function renderMyInstagramProfile(data) {
                     <span><i class="fa-regular fa-heart"></i> ${act.likes}</span>
                     <span><i class="fa-solid fa-reply"></i> ${act.shares}</span>
                 </div>
-                <button class="p-post-action-btn ig-btn" onclick="askAIPostAnalysis('Instagram', '${act.caption.replace(/'/g, "\\'")}')">
+                <button class="p-post-action-btn ig-btn" onclick="askAIPostAnalysis('Instagram', '${safeCaption}')">
                     <i class="fa-solid fa-wand-magic-sparkles"></i> Analizează cu AI
                 </button>
             </div>
@@ -856,6 +868,12 @@ function renderMyRedditProfile(data) {
     data.recent_activity.forEach(act => {
         const item = document.createElement('div');
         item.className = 'profile-post-card';
+        const safeTitle = act.title
+            .replace(/\\/g, '\\\\')
+            .replace(/'/g, "\\'")
+            .replace(/"/g, '\\"')
+            .replace(/\n/g, '\\n')
+            .replace(/\r/g, '\\r');
         item.innerHTML = `
             <div class="p-post-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
                 <img src="assets/rd_profile.svg" alt="u/Potential-Shirt-7063" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(255,255,255,0.1);">
@@ -872,7 +890,7 @@ function renderMyRedditProfile(data) {
                     <span><i class="fa-solid fa-arrow-up"></i> ${act.upvotes} upvotes</span>
                     <span><i class="fa-solid fa-comment"></i> ${act.comments} comentarii</span>
                 </div>
-                <button class="p-post-action-btn rd-btn" onclick="askAIPostAnalysis('Reddit', '${act.title.replace(/'/g, "\\'")}')">
+                <button class="p-post-action-btn rd-btn" onclick="askAIPostAnalysis('Reddit', '${safeTitle}')">
                     <i class="fa-solid fa-wand-magic-sparkles"></i> Analizează cu AI
                 </button>
             </div>
