@@ -8,6 +8,7 @@ from app.models import InteractionRequest, PostResponse, TrendCategory, ChatRequ
 from app.algorithm import TrendAlgorithm
 from app.agent import AIAgent
 from app.data import MY_PROFILES_STATS
+from app.meta_client import MetaClient
 
 app = FastAPI(title="Social Trends AI Agent API")
 
@@ -61,6 +62,26 @@ def get_trends(platform: str):
 
 @app.get("/api/my-profiles")
 def get_my_profiles():
+    try:
+        meta_client = MetaClient()
+        if meta_client.has_credentials:
+            import copy
+            profiles = copy.deepcopy(MY_PROFILES_STATS)
+            
+            profile_data = meta_client.get_facebook_profile()
+            if profile_data:
+                profiles["facebook"]["name"] = profile_data["name"]
+                profiles["facebook"]["followers"] = profile_data["friends_count"]
+                
+            feed_data = meta_client.get_facebook_feed()
+            if feed_data:
+                profiles["facebook"]["recent_activity"] = feed_data
+                profiles["facebook"]["posts_count"] = max(profiles["facebook"]["posts_count"], len(feed_data))
+                
+            return profiles
+    except Exception as e:
+        print(f"Error merging real Meta data: {e}")
+        
     return MY_PROFILES_STATS
 
 @app.post("/api/chat", response_model=ChatResponse)
