@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 import os
+import urllib.error
 
 from app.models import InteractionRequest, PostResponse, TrendCategory, ChatRequest, ChatResponse
 from app.algorithm import TrendAlgorithm
@@ -75,6 +76,8 @@ def get_my_profiles():
                 if profile_data:
                     profiles["facebook"]["name"] = profile_data["name"]
                     profiles["facebook"]["followers"] = profile_data["friends_count"]
+            except urllib.error.HTTPError as he:
+                profiles["meta_profile_error"] = f"Profile HTTP Error {he.code}: {he.read().decode()}"
             except Exception as e:
                 profiles["meta_profile_error"] = f"Profile Error: {str(e)}"
                 
@@ -83,6 +86,8 @@ def get_my_profiles():
                 if feed_data:
                     profiles["facebook"]["recent_activity"] = feed_data
                     profiles["facebook"]["posts_count"] = max(profiles["facebook"]["posts_count"], len(feed_data))
+            except urllib.error.HTTPError as he:
+                profiles["meta_feed_error"] = f"Feed HTTP Error {he.code}: {he.read().decode()}"
             except Exception as e:
                 profiles["meta_feed_error"] = f"Feed Error: {str(e)}"
         else:
