@@ -70,17 +70,21 @@ def get_my_profiles():
         profiles["meta_connected"] = meta_client.has_credentials
         
         if meta_client.has_credentials:
-            profile_data = meta_client.get_facebook_profile()
-            if profile_data:
-                profiles["facebook"]["name"] = profile_data["name"]
-                profiles["facebook"]["followers"] = profile_data["friends_count"]
+            try:
+                profile_data = meta_client.get_facebook_profile()
+                if profile_data:
+                    profiles["facebook"]["name"] = profile_data["name"]
+                    profiles["facebook"]["followers"] = profile_data["friends_count"]
+            except Exception as e:
+                profiles["meta_profile_error"] = f"Profile Error: {str(e)}"
                 
-            feed_data = meta_client.get_facebook_feed()
-            if feed_data:
-                profiles["facebook"]["recent_activity"] = feed_data
-                profiles["facebook"]["posts_count"] = max(profiles["facebook"]["posts_count"], len(feed_data))
-            else:
-                profiles["meta_error"] = "Feed returned None or empty"
+            try:
+                feed_data = meta_client.get_facebook_feed()
+                if feed_data:
+                    profiles["facebook"]["recent_activity"] = feed_data
+                    profiles["facebook"]["posts_count"] = max(profiles["facebook"]["posts_count"], len(feed_data))
+            except Exception as e:
+                profiles["meta_feed_error"] = f"Feed Error: {str(e)}"
         else:
             profiles["meta_error"] = "No META_ACCESS_TOKEN env var found"
     except Exception as e:

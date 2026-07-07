@@ -12,28 +12,22 @@ class MetaClient:
         self.base_url = "https://graph.facebook.com"
         self.has_credentials = bool(self.access_token)
 
-    def _make_request(self, endpoint: str, params: Dict[str, str]) -> Optional[Dict[str, Any]]:
+    def _make_request(self, endpoint: str, params: Dict[str, str]) -> Dict[str, Any]:
         if not self.has_credentials:
-            return None
+            raise Exception("No credentials configured")
         
         # Build query parameters
         all_params = {**params, "access_token": self.access_token}
         params_str = urllib.parse.urlencode(all_params)
         url = f"{self.base_url}/{self.api_version}/{endpoint}?{params_str}"
         
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": "FastAPI-Meta-Client"})
-            with urllib.request.urlopen(req, timeout=8) as response:
-                return json.loads(response.read().decode())
-        except Exception as e:
-            print(f"Error fetching from Meta API ({endpoint}): {e}")
-            return None
+        req = urllib.request.Request(url, headers={"User-Agent": "FastAPI-Meta-Client"})
+        with urllib.request.urlopen(req, timeout=8) as response:
+            return json.loads(response.read().decode())
 
-    def get_facebook_profile(self) -> Optional[Dict[str, Any]]:
+    def get_facebook_profile(self) -> Dict[str, Any]:
         # Fetch name and total friends count
         data = self._make_request("me", {"fields": "id,name,friends.summary(true)"})
-        if not data:
-            return None
         
         # Extract friends count
         friends_count = 363 # Default fallback
@@ -48,14 +42,14 @@ class MetaClient:
             "friends_count": friends_count
         }
 
-    def get_facebook_feed(self) -> Optional[List[Dict[str, Any]]]:
+    def get_facebook_feed(self) -> List[Dict[str, Any]]:
         # Fetch posts, stories, reactions, and comments count using v20.0 compliant fields
         data = self._make_request("me/feed", {
             "fields": "id,message,story,created_time,reactions.limit(0).summary(true),comments.limit(0).summary(true)",
             "limit": "10"
         })
         if not data or "data" not in data:
-            return None
+            return []
         
         formatted_activity = []
         for post in data["data"]:
