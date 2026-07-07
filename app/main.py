@@ -62,12 +62,14 @@ def get_trends(platform: str):
 
 @app.get("/api/my-profiles")
 def get_my_profiles():
+    import copy
+    profiles = copy.deepcopy(MY_PROFILES_STATS)
+    
     try:
         meta_client = MetaClient()
+        profiles["meta_connected"] = meta_client.has_credentials
+        
         if meta_client.has_credentials:
-            import copy
-            profiles = copy.deepcopy(MY_PROFILES_STATS)
-            
             profile_data = meta_client.get_facebook_profile()
             if profile_data:
                 profiles["facebook"]["name"] = profile_data["name"]
@@ -77,12 +79,15 @@ def get_my_profiles():
             if feed_data:
                 profiles["facebook"]["recent_activity"] = feed_data
                 profiles["facebook"]["posts_count"] = max(profiles["facebook"]["posts_count"], len(feed_data))
-                
-            return profiles
+            else:
+                profiles["meta_error"] = "Feed returned None or empty"
+        else:
+            profiles["meta_error"] = "No META_ACCESS_TOKEN env var found"
     except Exception as e:
         print(f"Error merging real Meta data: {e}")
+        profiles["meta_error"] = f"Exception: {str(e)}"
         
-    return MY_PROFILES_STATS
+    return profiles
 
 @app.post("/api/chat", response_model=ChatResponse)
 def chat_with_agent(req: ChatRequest):
