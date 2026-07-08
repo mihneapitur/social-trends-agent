@@ -110,7 +110,7 @@ class AIAgent:
                     "Ești TrendAgent AI, un asistent inteligent de Social Media Analytics creat pentru Mihnea Pițur (un student pasionat de programare, suporter înrăit Universitatea Craiova).\n\n"
                     "Profilurile lui Mihnea:\n"
                     "1. Facebook (Mihnea Pițur): 363 prieteni, 739 postări, 4.8% engagement. Postări recente despre educație, evaluare națională, opinii sociale.\n"
-                    "2. Instagram (@jesuismihnea): 262 urmăritori, 66 postări, 12.4% engagement excepțional! Postări de la discursuri la Universitatea din Craiova (cu slide-uri despre Craiova Maxima) și poezie.\n"
+                    "2. Instagram (@jesuismihnea): 262 urmăritori, 67 postări, 12.4% engagement excepțional! Postări de la discursuri la Universitatea din Craiova (cu slide-uri despre Craiova Maxima), postări de la Radio Oltenia Craiova și poezie.\n"
                     "3. Reddit (u/Potential-Shirt-7063): 2022 Karma (852 post karma, 1170 comment karma), foarte activ pe r/Craiova și r/UniRO (discuții utile locale sau despre restanțe/profesori la Automatică Craiova).\n\n"
                     "Datele în timp real din aplicație (dashboard):\n"
                     f"- Coeficientul Time Decay (atenuare temporală): λ={self.algo.decay_rate}\n"
@@ -224,13 +224,13 @@ class AIAgent:
                 response = (
                     "📸 **Audit AI Profil Instagram (@jesuismihnea)**\n\n"
                     "• **Audiență**: 262 de urmăritori loiali.\n"
-                    "• **Activitate**: 66 de postări estetice.\n"
+                    "• **Activitate**: 67 de postări estetice.\n"
                     "• **Engagement mediu**: 12.4% (o rată de engagement extrem de ridicată, mult peste media industriei de ~2-3%!).\n\n"
                     "🔍 **Analiză conținut**:\n"
-                    "Publicul tău reacționează excepțional la postări de mare impact emoțional și cultural. Postarea ta recentă cu versuri (*„Și luna-și ascunde răni / Peste orizont...”*) și o fotografie de la un discurs pe scena Universității din Craiova a înregistrat 42 de aprecieri reale și felicitări în comentarii.\n\n"
+                    "Publicul tău reacționează excepțional la postări de mare impact personal și profesional. Postarea ta recentă din studioul **Radio Oltenia Craiova** (cu mesajul *„Alexa, turn on the radio! 📻”*) a înregistrat 59 de aprecieri reale și felicitări în comentarii (de la marius.andrei.i, evelingeoanca și alții).\n\n"
                     "💡 **Recomandări strategice de la Agentul AI**:\n"
-                    "1. **Conținut la microfon (Public Speaking)**: Prezența ta pe scenă la Universitatea din Craiova, cu slide-uri despre „Suporter înrăit: Universitatea Craiova”, are reach excelent. Recomandăm încărcarea unor clipuri video scurte (Reels) din timpul acestor discursuri.\n"
-                    "2. **Branding personal autentic**: Combinația dintre parcursul tău academic și postările cu tentă artistică/poetică îți oferă un profil unic cu o rată de loialitate a audienței de 12.4%. Păstrează acest mix!"
+                    "1. **Conținut la microfon (Public Speaking / Media)**: Prezența ta în studioul radio și pe scenă la Universitatea din Craiova are reach excelent și aduce un plus uriaș de engagement. Recomandăm postarea de clipuri video scurte (Reels) din timpul acestor activități.\n"
+                    "2. **Branding personal autentic**: Mixul dintre activitatea ta la radio/facultate și postările artistice/estetice îți oferă un profil unic cu o rată de loialitate a audienței de 12.4%. Păstrează această direcție!"
                 )
                 analysis += "-> Rulare audit specific pentru profilul de Instagram al lui Mihnea."
             elif any(rd in msg for rd in ["reddit", "rd"]):

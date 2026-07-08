@@ -120,9 +120,10 @@ MY_PROFILES_STATS = {
         "username": "jesuismihnea",
         "name": "Mihnea Pițur",
         "followers": 262,
-        "posts_count": 66,
+        "posts_count": 67,
         "avg_engagement": 12.4,
         "recent_activity": [
+            {"date": "Acum 6 zile", "caption": "Alexa, turn on the radio! 📻 (Locație: Radio Oltenia, Craiova)", "views": 480, "likes": 59, "shares": 8},
             {"date": "11 iunie", "caption": "This is how you remind me. 🎤✨", "views": 180, "likes": 32, "shares": 3},
             {"date": "7 iunie", "caption": "Și luna-și ascunde răni\nPeste orizont\nȘi sigur și tu, ești om\nDoar un om\nOricât ai vrea să fii mai mult. 🎤🏫", "views": 240, "likes": 42, "shares": 5}
         ]
