@@ -106,7 +106,7 @@ MY_PROFILES_STATS = {
         "username": "mihnea.pitur.18",
         "name": "Mihnea Pițur",
         "followers": 363,
-        "posts_count": 736,
+        "posts_count": 739,
         "avg_engagement": 4.8,
         "recent_activity": [
             {"date": "Acum 9 ore", "title": "Nu știu dacă ați urmărit faza virală de ieri în care o absolventă a școlii gimnaziale a fost făcută cu ou și cu oțet de reporterul Antenei 1 după Evaluarea Națională. Vezi, Doamne, ce-s cu unghiile alea și cu tatuajul de pe mâna dreaptă?! Apreciez mult sinceritatea și coerența fetei în cauză. Dar mă supără maxim faptul că tembeliziunea difuzează copiii de la școlile mai slabe ca să-i facă muci și să-i subestimeze, în loc să încurajeze gândirea logică. Ați văzut vreodată reporteri care să vină după simulări/examene oficiale la Sava, Vianu, Lazăr? NU! Se duc la licee mai slabe, iar cel din fața micului ecran trage concluzia că tinerii sunt niște ratați fără viitor. Asta face tembeliziunea în goana după audiență: generalizează. Recunosc, râd și eu copios când se difuzează perlele de la examene, dar îmi dau seama că am fost părtaș unui sistem educațional ce nu a promovat gândirea critică și libertatea de exprimare printre elevi. Dacă eu aș fi lucrat în presă într-o mare televiziune comercială și m-ar fi pus cineva să subestimez copiii de la școlile proaste, în secunda 2 mi-aș fi dat demisia. Cât de retard să fii ca reporter să critici vestimentația, aranjatul părului, machiajul, tatuajele de pe corp sau cât de mult a învățat pentru examen. Ca să nu mai zic că știrile care se axează strict pe așa ceva sunt penibile și nu aduc plus valoare unui jurnal de știri. Să le fie rușine ziariștilor de carton! 📺🏫", "views": 190, "likes": 6, "shares": 2},

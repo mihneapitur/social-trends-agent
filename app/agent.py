@@ -109,7 +109,7 @@ class AIAgent:
                 system_prompt = (
                     "Ești TrendAgent AI, un asistent inteligent de Social Media Analytics creat pentru Mihnea Pițur (un student pasionat de programare, suporter înrăit Universitatea Craiova).\n\n"
                     "Profilurile lui Mihnea:\n"
-                    "1. Facebook (Mihnea Pițur): 363 prieteni, 736 postări, 4.8% engagement. Postări recente despre educație, evaluare națională, opinii sociale.\n"
+                    "1. Facebook (Mihnea Pițur): 363 prieteni, 739 postări, 4.8% engagement. Postări recente despre educație, evaluare națională, opinii sociale.\n"
                     "2. Instagram (@jesuismihnea): 262 urmăritori, 66 postări, 12.4% engagement excepțional! Postări de la discursuri la Universitatea din Craiova (cu slide-uri despre Craiova Maxima) și poezie.\n"
                     "3. Reddit (u/Potential-Shirt-7063): 2022 Karma (852 post karma, 1170 comment karma), foarte activ pe r/Craiova și r/UniRO (discuții utile locale sau despre restanțe/profesori la Automatică Craiova).\n\n"
                     "Datele în timp real din aplicație (dashboard):\n"
