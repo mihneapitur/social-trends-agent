@@ -119,7 +119,7 @@ MY_PROFILES_STATS = {
         "url": "https://www.instagram.com/jesuismihnea",
         "username": "jesuismihnea",
         "name": "Mihnea Pițur",
-        "followers": 262,
+        "followers": 264,
         "posts_count": 67,
         "avg_engagement": 12.4,
         "recent_activity": [

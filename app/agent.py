@@ -110,7 +110,7 @@ class AIAgent:
                     "Ești TrendAgent AI, un asistent inteligent de Social Media Analytics creat pentru Mihnea Pițur (un student pasionat de programare, suporter înrăit Universitatea Craiova).\n\n"
                     "Profilurile lui Mihnea:\n"
                     "1. Facebook (Mihnea Pițur): 363 prieteni, 739 postări, 4.8% engagement. Postări recente despre educație, evaluare națională, opinii sociale.\n"
-                    "2. Instagram (@jesuismihnea): 262 urmăritori, 67 postări, 12.4% engagement excepțional! Postări de la discursuri la Universitatea din Craiova (cu slide-uri despre Craiova Maxima), postări de la Radio Oltenia Craiova și poezie.\n"
+                    "2. Instagram (@jesuismihnea): 264 urmăritori, 67 postări, 12.4% engagement excepțional! Postări de la discursuri la Universitatea din Craiova (cu slide-uri despre Craiova Maxima), postări de la Radio Oltenia Craiova și poezie.\n"
                     "3. Reddit (u/Potential-Shirt-7063): 2022 Karma (852 post karma, 1170 comment karma), foarte activ pe r/Craiova și r/UniRO (discuții utile locale sau despre restanțe/profesori la Automatică Craiova).\n\n"
                     "Datele în timp real din aplicație (dashboard):\n"
                     f"- Coeficientul Time Decay (atenuare temporală): λ={self.algo.decay_rate}\n"
@@ -223,7 +223,7 @@ class AIAgent:
             elif any(ig in msg for ig in ["instagram", "insta", "ig"]):
                 response = (
                     "📸 **Audit AI Profil Instagram (@jesuismihnea)**\n\n"
-                    "• **Audiență**: 262 de urmăritori loiali.\n"
+                    "• **Audiență**: 264 de urmăritori loiali.\n"
                     "• **Activitate**: 67 de postări estetice.\n"
                     "• **Engagement mediu**: 12.4% (o rată de engagement extrem de ridicată, mult peste media industriei de ~2-3%!).\n\n"
                     "🔍 **Analiză conținut**:\n"
@@ -249,8 +249,8 @@ class AIAgent:
             else:
                 response = (
                     "Am realizat un audit general al profilelor tale sociale, Mihnea:\n\n"
-                    "🔵 **Facebook (Mihnea Pițur)**: 363 prieteni, 736 postări, 4.8% engagement.\n"
-                    "📸 **Instagram (@jesuismihnea)**: 262 urmăritori, 66 postări, 12.4% engagement excepțional!\n"
+                    "🔵 **Facebook (Mihnea Pițur)**: 363 prieteni, 739 postări, 4.8% engagement.\n"
+                    "📸 **Instagram (@jesuismihnea)**: 264 urmăritori, 67 postări, 12.4% engagement excepțional!\n"
                     "🔴 **Reddit (u/Potential-Shirt-7063)**: 2,022 Karma, 688 contribuții.\n\n"
                     "Selectează o platformă din sidebar pentru o analiză detaliată și recomandări specifice de conținut."
                 )
