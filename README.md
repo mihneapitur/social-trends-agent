@@ -4,6 +4,12 @@ Aceasta este o aplicație full-stack (Python + HTML/CSS/JS) dezvoltată ca proie
 
 ---
 
+## Prezentare Video
+Puteți viziona o demonstrație video completă a funcționalității aplicației pe YouTube:
+👉 **[Prezentare Video Demo - TrendAgent](https://youtu.be/DNZcPIaVtys)**
+
+---
+
 ## Caracteristici Cheie
 - **Arhitectură Full-Stack**: Backend robust în Python (FastAPI) și o interfață premium de frontend în HTML/CSS pur cu JavaScript.
 - **Algoritm de Time Decay**: Punctajele se degradează în timp real pe măsură ce acțiunile devin mai vechi.
